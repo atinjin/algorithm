@@ -1,4 +1,4 @@
-import java.util.*;
+package com.github.atinjin.algorithm;
 
 public class Wildcard {
     
