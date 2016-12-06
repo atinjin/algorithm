@@ -12,8 +12,8 @@ public class EscapeMaze {
 
     public static void main(String[] args) {
         EscapeMaze maze = new EscapeMaze();
-        Vertex escapePoint = new Vertex(6, 1);
-        Vertex startPoint = new Vertex(0, 1);
+        Vertex escapePoint = new Vertex(5, 5);
+        Vertex startPoint = new Vertex(1, 0);
 
         boolean canEscape = maze.escape(startPoint, escapePoint);
 
@@ -31,9 +31,11 @@ public class EscapeMaze {
     private static void printTheWay(EscapeMaze maze, Vertex escapePoint, Vertex startPoint) {
         Vertex pointer = escapePoint;
         Deque<Vertex> queue = new LinkedList<>();
+        int count = 0;
         while (!pointer.equals(startPoint)) {
             queue.offerLast(pointer);
             pointer = maze.path[pointer.x][pointer.y];
+            count++;
         }
         queue.offerLast(startPoint);
 
@@ -41,16 +43,17 @@ public class EscapeMaze {
             Vertex v = queue.pollFirst();
             System.out.println(v.x + "," + v.y);
         }
+        System.out.println("Total " + count + " steps");
     }
 
 
     int[][] maze = { //y =  0, 1, 2, 3, 4, 5
             /*x=0*/        {0, 1, 0, 1, 0, 0 },
-            /*x=1*/        {1, 1, 0, 1, 0, 0 },
-            /*x=2*/        {0, 1, 0, 1, 0, 0 },
-            /*x=3*/        {0, 1, 1, 1, 1, 0 },
-            /*x=4*/        {0, 1, 0, 0, 1, 0 },
-            /*x=5*/        {1, 1, 0, 0, 1, 1 },
+            /*x=1*/        {1, 1, 1, 1, 1, 1 },
+            /*x=2*/        {0, 0, 0, 1, 0, 1 },
+            /*x=3*/        {0, 1, 1, 1, 0, 1 },
+            /*x=4*/        {0, 1, 0, 0, 0, 1 },
+            /*x=5*/        {1, 1, 1, 1, 1, 1 },
             /*x=6*/        {0, 1, 0, 0, 0, 0 }
     };
 
