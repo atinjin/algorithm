@@ -22,7 +22,7 @@ import java.util.stream.IntStream;
  * Contributors:
  * Ryan Donghyun Jin (atinjin@gmail.com)
  */
-public class EasyStair_10844 {
+public class Pr_10844_EasyStair {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
