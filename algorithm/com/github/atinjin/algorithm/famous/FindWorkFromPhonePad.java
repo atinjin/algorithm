@@ -1,4 +1,4 @@
-package com.github.atinjin.algorithm;
+package com.github.atinjin.algorithm.famous;
 
 /**
  * Created by ryanjin on 10/12/2016.

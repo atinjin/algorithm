@@ -1,4 +1,6 @@
-import java.util.*;
+package com.github.atinjin.algorithm.queue;
+
+import java.util.Stack;
 
 public class TwoStackQueueTest {
 

@@ -1,4 +1,4 @@
-package com.github.atinjin.algorithm;
+package com.github.atinjin.algorithm.famous;
 
 import java.util.ArrayList;
 import java.util.Deque;

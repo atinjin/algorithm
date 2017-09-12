@@ -1,4 +1,4 @@
-package com.github.atinjin.algorithm;
+package com.github.atinjin.algorithm.dynamic;
 
 import org.junit.jupiter.api.Test;
 

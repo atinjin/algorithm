@@ -1,8 +1,8 @@
-package com.github.atinjin.algorithm;
+package com.github.atinjin.algorithm.queue;
 
-import java.util.List;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class LinkedListAdding {
 

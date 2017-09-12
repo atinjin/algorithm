@@ -1,4 +1,4 @@
-package com.github.atinjin.algorithm;
+package com.github.atinjin.algorithm.queue;
 
 /**
  * Created by ryanjin on 04/11/2016.

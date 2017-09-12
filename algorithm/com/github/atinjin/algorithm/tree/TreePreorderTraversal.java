@@ -1,4 +1,4 @@
-package com.github.atinjin.algorithm;
+package com.github.atinjin.algorithm.tree;
 
 public class TreePreorderTraversal {
     public static void main(String[] args) {

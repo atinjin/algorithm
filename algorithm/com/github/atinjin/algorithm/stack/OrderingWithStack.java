@@ -1,4 +1,4 @@
-package com.github.atinjin.algorithm;
+package com.github.atinjin.algorithm.stack;
 
 import java.util.Deque;
 import java.util.LinkedList;

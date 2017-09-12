@@ -1,7 +1,6 @@
-package com.github.atinjin.algorithm;
+package com.github.atinjin.algorithm.dynamic;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -23,19 +22,24 @@ import java.util.stream.IntStream;
  * Contributors:
  * Ryan Donghyun Jin (atinjin@gmail.com)
  */
-public class Pr_1157_Josephus {
+public class Pr_10844_EasyStair {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
-        int m = in.nextInt();
-        Queue<Integer> q = new LinkedList<>();
-        IntStream.range(0+1, n+1).forEach(q::offer);
-        System.out.print("<");
-        while(q.size() > 0) {
-            IntStream.range(0, m-1).forEach(i -> {int value = q.poll(); q.offer(value);});
-            int remove = q.poll();
-            System.out.print(((q.size()==n-1)?"":", ") +remove);
-        }
-        System.out.print(">");
+
+        long[][] d = new long[101][10];
+        IntStream.range(1,9+1).forEach(i -> d[1][i] = 1);
+        IntStream.range(2,n+1).forEach(i -> {
+            IntStream.range(0, 9+1).forEach(j -> {
+                if(j-1 >= 0) d[i][j] += d[i-1][j-1];
+                if(j+1 <= 9) d[i][j] += d[i-1][j+1];
+                d[i][j] = d[i][j] % 1000000000;
+            });
+        });
+
+        System.out.println(Arrays.stream(d[n]).sum() % 1000000000);
+
     }
 }
+
+

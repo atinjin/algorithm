@@ -1,4 +1,4 @@
-package com.github.atinjin.algorithm;
+package com.github.atinjin.algorithm.queue;
 
 import java.util.LinkedList;
 import java.util.Queue;

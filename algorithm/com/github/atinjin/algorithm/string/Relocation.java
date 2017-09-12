@@ -1,4 +1,4 @@
-package com.github.atinjin.algorithm;
+package com.github.atinjin.algorithm.string;
 
 /**
  * Created by ryanjin on 04/11/2016.
