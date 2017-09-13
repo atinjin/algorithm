@@ -53,6 +53,7 @@ public class Pr_2011_DecryptNumbers {
                 d[i] = d[i] + d[i-1];
 
             //10 ~ 26
+            if(i < 2) continue;
             if( (( pre == '1' && x >= '0' && x <= '9') || ( pre== '2' && x >= '0' && x <= '6' )) ) {
                 d[i] = (d[i] + d[i - 2]) % 1000000;
             }
