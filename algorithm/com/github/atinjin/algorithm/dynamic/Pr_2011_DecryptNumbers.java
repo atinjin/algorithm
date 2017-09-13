@@ -29,41 +29,47 @@ public class Pr_2011_DecryptNumbers {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String encrypted = in.next();
-        int[][] d = new int[encrypted.length()+1][1];
-        int count = countDecryptNum(encrypted, d);
+
+        int count = countDecryptNum(encrypted);
         System.out.println(count);
     }
 
-    public static int countDecryptNum(String encrypted, int[][] d) {
+    public static int countDecryptNum(String encrypted) {
         /**
          * i번째 숫자에 따라서 d[i-1]
          */
-        d[0][0] = 1;
-        int l = encrypted.length();
-        if(l == 1) return 1;
+        int[] d = new int[encrypted.length()+1];
+        encrypted = " "+ encrypted;
+        char[] s = encrypted.toCharArray();
 
-        for (int i = 1; i < encrypted.length(); i++) {
-            char x = encrypted.charAt(i);
-            char pre = encrypted.charAt(i-1);
-            int count = 0;
+        d[0] = 1;
+        int l = encrypted.length();
+
+        for (int i = 1; i <= encrypted.length()-1; i++) {
+            char x = s[i];
+            char pre = s[i-1];
             //1 ~ 9
             if(x >= '1' && x<= '9')
-                count++;
+                d[i] = d[i] + d[i-1];
 
             //10 ~ 26
-            if( ( pre == '1' && x >= '0' && x <= '9')
-                    || ( pre== '2' && x >= '0' && x <= '6' ))
-                count++;
-
-            d[i][0] = (d[i-1][0] + count) % 1000000;
+            if( (( pre == '1' && x >= '0' && x <= '9') || ( pre== '2' && x >= '0' && x <= '6' )) ) {
+                d[i] = (d[i] + d[i - 2]) % 1000000;
+            }
         }
 
-        return d[l-1][0];
+        return d[l-1];
     }
 
     @Test
     public void test1() {
-        int result = Pr_2011_DecryptNumbers.countDecryptNum("25114", new int[5+1][1]);
+        int result = Pr_2011_DecryptNumbers.countDecryptNum("25114");
         assertEquals(6, result, "25114");
+    }
+    @Test
+    public void test2() {
+        String num = "123"; //1,23 //12,3//1,2,3
+        int result = Pr_2011_DecryptNumbers.countDecryptNum(num);
+        assertEquals(3, result, num);
     }
 }
