@@ -50,11 +50,20 @@ public class Pr_1260_DFS_BFS {
         // 문제의 정의상 번호가 적은 순으로 방문하기 위해서 정렬한다
         Arrays.stream(link).filter(Objects::nonNull).forEach(Collections::sort);
 
-        boolean[] isVisited = new boolean[vertexes+1];
-        dfs(startNode, link, isVisited);
+        dfs(startNode, link, new boolean[vertexes+1]);
+        System.out.println("");
+        bfs(1, link, new boolean[vertexes+1]);
     }
 
-    private static void dfs(int startNode, List<Integer>[] link, boolean[] isVisited) {
+    /**
+     * DFS(Depth First Search) 그래프의 시작점에서 최대한 먼 Node부터 검색한다.
+     *   - Stack을 이용하여 While문을 이용한 구현 방식
+     *   - Recursive call을 이용하여 call stack을 이용한 구현 방식
+     * @param startNode 시작 node
+     * @param link Edge List를 저장하고 있는 Array
+     * @param isVisited 각 노드별 방문 여부를 저장한 Array
+     */
+    public static void dfs(int startNode, List<Integer>[] link, boolean[] isVisited) {
         List<Integer> edges = link[startNode];
         if(edges != null) {
             // 방문한 node는 방문했다고(true) 표시하고 출력
@@ -71,6 +80,38 @@ public class Pr_1260_DFS_BFS {
         }
     }
 
+    /**
+     * BFS(Breadth First Search) 그래프의 시작점에서 가까운 Node부터 검색한다.
+     *   -  Queue를 사용하여 방문할 Node를 저장하고 찾아진 모든 노드를 방문할 때까지(Queue is empty) 반복한다.
+     *   - (중요) Queue에 Node를 넣을 때 방문 표시를 해야한다. 중복으로 Queue에 넣는 것을 방지하기 위해서이다.
+     * @param startNode 시작 node
+     * @param link Edge List를 저장하고 있는 Array
+     * @param isVisited 각 노드별 방문 여부를 저장한 Array
+     */
+    public static void bfs(int startNode, List<Integer>[] link, boolean[] isVisited) {
+        // 방문할 Node를 쌓아둘 Queue
+        Queue<Integer> q = new LinkedList<>();
+        // 시작 Node를 넣는다. 방문 표시를 먼저 한다.
+        q.add(startNode);
+        isVisited[startNode] = true;
+        // Queue가 빈다는 것은 더이상 방문할 Node가 없다는 것이다.
+        while(!q.isEmpty()) {
+            int node = q.poll();
+            if(link[node] == null) continue;
+
+            System.out.print(node + " ");
+
+            for(int next: link[node]) {
+                if(!isVisited[next]) {
+                    // Queue에 넣기 전에 방문 표시를 한다.
+                    // 그렇지 않으면 Edge가 여러개일 경우 같은 노드를 여러번 Queue에 넣는 경우가 생긴다.
+                    isVisited[next] = true;
+                    q.offer(next);
+                }
+            }
+        }
+
+    }
 
     /**
      * 양방향 edge를 생성해준다 start -> end, end -> start
@@ -110,5 +151,7 @@ public class Pr_1260_DFS_BFS {
         Arrays.stream(link).filter(Objects::nonNull).forEach(Collections::sort);
 
         dfs(1, link, new boolean[vertexes+1]);
+        System.out.println("");
+        bfs(1, link, new boolean[vertexes+1]);
     }
 }
