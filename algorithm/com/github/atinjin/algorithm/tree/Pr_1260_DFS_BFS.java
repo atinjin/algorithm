@@ -52,7 +52,7 @@ public class Pr_1260_DFS_BFS {
 
         dfs(startNode, link, new boolean[vertexes+1]);
         System.out.println("");
-        bfs(1, link, new boolean[vertexes+1]);
+        bfs(startNode, link, new boolean[vertexes+1]);
     }
 
     /**
