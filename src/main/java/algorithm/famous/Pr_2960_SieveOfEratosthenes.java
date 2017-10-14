@@ -97,8 +97,9 @@ public class Pr_2960_SieveOfEratosthenes {
 
     @Test
     public void test() {
-        /*
-        2, 4, 6, 8, 10, 3, 9, 5, 7
+        /**
+         * 예)
+         * 2, 4, 6, 8, 10, 3, 9, 5, 7
          */
         assertEquals(9, find(10, 7));
         assertEquals(3, find(10, 6));
