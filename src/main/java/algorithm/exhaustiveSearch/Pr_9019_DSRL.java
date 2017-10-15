@@ -88,7 +88,12 @@ public class Pr_9019_DSRL {
 
         /**
          * caution : now 값이 0(zero)인 경우를 조심해야 한다
-         * 0일 경우 나눌 수 없기 때문에 수식에 의한 shift에서 오류가 발생한다
+         * 문제의 조건에서 S operation의 경우, 0일 경우 9999로 변한다고 하였다
+         *
+         * 한가지 더 유의할 점은
+         *  0 / 1000 = 0
+         *  0 % 100 = 0
+         * 연산 오류가 발생하지 않는다
          */
 
         // D
@@ -96,9 +101,9 @@ public class Pr_9019_DSRL {
         // S
         nexts.put("S", (now == 0)?9999:now - 1);
         // L : 1234 -> 2341
-        nexts.put("L", (now == 0)?0:now / 1000 + (now % 1000) * 10);
+        nexts.put("L", /*(now == 0)?0:*/now / 1000 + (now % 1000) * 10);
         // R : 1234 -> 4123
-        nexts.put("R", (now == 0)?0:(now % 10) * 1000 + now / 10);
+        nexts.put("R", /*(now == 0)?0:*/(now % 10) * 1000 + now / 10);
         return nexts;
     }
 
@@ -138,5 +143,11 @@ public class Pr_9019_DSRL {
     @Test
     public void test3() {
         assertEquals("SDSDRS", findSolution(new int[]{9999, 998}));
+    }
+
+    @Test
+    public void test4() {
+        Map<String,Integer> map = getNext(0);
+        map.forEach((k,v) -> System.out.println(k + " : " +v));
     }
 }
