@@ -84,16 +84,21 @@ public class Pr_9019_DSRL {
     }
 
     private static Map<String,Integer> getNext(int now) {
-        Map<String,Integer> nexts = new HashMap<>();
+        Map<String,Integer> nexts = new LinkedHashMap<>();
+
+        /**
+         * caution : now 값이 0(zero)인 경우를 조심해야 한다
+         * 0일 경우 나눌 수 없기 때문에 수식에 의한 shift에서 오류가 발생한다
+         */
 
         // D
         nexts.put("D", (now * 2) % 10000);
         // S
         nexts.put("S", (now == 0)?9999:now - 1);
-        // R : 1234 -> 4123
-        nexts.put("R", (now % 10) * 1000 + now / 10);
         // L : 1234 -> 2341
-        nexts.put("L", now / 1000 + (now % 1000) * 10);
+        nexts.put("L", (now == 0)?0:now / 1000 + (now % 1000) * 10);
+        // R : 1234 -> 4123
+        nexts.put("R", (now == 0)?0:(now % 10) * 1000 + now / 10);
         return nexts;
     }
 
@@ -109,7 +114,7 @@ public class Pr_9019_DSRL {
 
     @Test
     public void test() {
-        assertTrue(Arrays.asList("LL","RR").contains(findSolution(new int[]{1234, 3412})));
+        assertTrue(Arrays.asList("LL").contains(findSolution(new int[]{1234, 3412})));
         assertEquals("L", findSolution(new int[]{1000, 1}));
         assertEquals("DDDD", findSolution(new int[]{1, 16}));
         assertEquals("", findSolution(new int[]{0, 0}));
