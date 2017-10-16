@@ -1,4 +1,4 @@
-package com.github.atinjin.algorithm;
+package algorithm.famous;
 
 import java.util.Arrays;
 
